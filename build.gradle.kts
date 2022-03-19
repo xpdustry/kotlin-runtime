@@ -6,7 +6,6 @@ import net.ltgt.gradle.errorprone.errorprone
 import java.io.ByteArrayOutputStream
 
 plugins {
-    // java
     id("net.kyori.indra") version "2.1.1"
     id("net.kyori.indra.publishing") version "2.1.1"
     kotlin("jvm") version "1.6.10"
@@ -46,12 +45,9 @@ tasks.create("createRelease") {
     }
 }
 
-try {
-    rootProject.tasks.named("publishMavenPublicationToXpdustryRepository").get().enabled = false
-} catch (ignored: UnknownTaskException) {
-}
+rootProject.tasks.withType<AbstractPublishToMaven> { enabled = false }
 
-allprojects {
+subprojects {
     apply(plugin = "net.kyori.indra")
     apply(plugin = "net.kyori.indra.publishing")
     apply(plugin = "net.ltgt.errorprone")
@@ -90,6 +86,13 @@ allprojects {
         }
     }
 
+    tasks.named<Jar>("shadowJar") {
+        val file = temporaryDir.resolve("plugin.json")
+        val localMetadata = readJson(file("$projectDir/local-plugin.json"))
+        file.writeText(groovy.json.JsonBuilder(localMetadata + parentMetadata).toPrettyString())
+        from(file)
+    }
+
     tasks.create("getArtifactPath") {
         doLast { println(tasks.shadowJar.get().archiveFile.get().toString()) }
     }
@@ -122,14 +125,5 @@ allprojects {
                 }
             }
         }
-    }
-}
-
-subprojects {
-    tasks.named<Jar>("shadowJar") {
-        val file = temporaryDir.resolve("plugin.json")
-        val localMetadata = readJson(file("$projectDir/local-plugin.json"))
-        file.writeText(groovy.json.JsonBuilder(localMetadata + parentMetadata).toPrettyString())
-        from(file)
     }
 }
