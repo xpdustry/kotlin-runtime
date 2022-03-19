@@ -1,4 +1,4 @@
-# TemplatePlugin
+#  KotlinRuntimePlugin
 
 [![Build](https://github.com/Xpdustry/KotlinRuntimePlugin/actions/workflows/build.yml/badge.svg)](https://github.com/Xpdustry/KotlinRuntimePlugin/actions/workflows/build.yml)
 [![Mindustry 6.0 | 7.0 ](https://img.shields.io/badge/Mindustry-6.0%20%7C%207.0-ffd37f)](https://github.com/Anuken/Mindustry/releases)
