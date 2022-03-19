@@ -51,7 +51,7 @@ try {
 } catch (ignored: UnknownTaskException) {
 }
 
-subprojects {
+allprojects {
     apply(plugin = "net.kyori.indra")
     apply(plugin = "net.kyori.indra.publishing")
     apply(plugin = "net.ltgt.errorprone")
@@ -60,7 +60,6 @@ subprojects {
 
     toxopid {
         modTarget.set(ModTarget.HEADLESS)
-
         val compileVersion = parentMetadata["minGameVersion"] as String
         arcCompileVersion.set(compileVersion)
         mindustryCompileVersion.set(compileVersion)
@@ -95,13 +94,6 @@ subprojects {
         doLast { println(tasks.shadowJar.get().archiveFile.get().toString()) }
     }
 
-    tasks.named<Jar>("shadowJar") {
-        val file = temporaryDir.resolve("plugin.json")
-        val localMetadata = readJson(file("$projectDir/local-plugin.json"))
-        file.writeText(groovy.json.JsonBuilder(localMetadata + parentMetadata).toPrettyString())
-        from(file)
-    }
-
     signing {
         val signingKey: String? by project
         val signingPassword: String? by project
@@ -109,6 +101,11 @@ subprojects {
     }
 
     indra {
+        javaVersions {
+            target(17)
+            minimumToolchain(17)
+        }
+
         publishReleasesTo("xpdustry", "https://repo.xpdustry.fr/releases")
         publishSnapshotsTo("xpdustry", "https://repo.xpdustry.fr/snapshots")
 
@@ -133,11 +130,11 @@ subprojects {
     }
 }
 
-allprojects {
-    indra {
-        javaVersions {
-            target(17)
-            minimumToolchain(17)
-        }
+subprojects {
+    tasks.named<Jar>("shadowJar") {
+        val file = temporaryDir.resolve("plugin.json")
+        val localMetadata = readJson(file("$projectDir/local-plugin.json"))
+        file.writeText(groovy.json.JsonBuilder(localMetadata + parentMetadata).toPrettyString())
+        from(file)
     }
 }
