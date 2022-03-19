@@ -51,20 +51,10 @@ try {
 } catch (ignored: UnknownTaskException) {
 }
 
-allprojects {
-    apply(plugin = "net.kyori.indra")
-
-    indra {
-        javaVersions {
-            target(17)
-            minimumToolchain(17)
-        }
-    }
-}
-
 subprojects {
-    apply(plugin = "net.ltgt.errorprone")
+    apply(plugin = "net.kyori.indra")
     apply(plugin = "net.kyori.indra.publishing")
+    apply(plugin = "net.ltgt.errorprone")
     apply(plugin = "fr.xpdustry.toxopid")
     apply(plugin = "org.jetbrains.kotlin.jvm")
 
@@ -139,6 +129,15 @@ subprojects {
                     developer { id.set(parentMetadata["author"] as String) }
                 }
             }
+        }
+    }
+}
+
+allprojects {
+    indra {
+        javaVersions {
+            target(17)
+            minimumToolchain(17)
         }
     }
 }
