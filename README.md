@@ -2,7 +2,7 @@
 
 [![Build](https://github.com/Xpdustry/KotlinRuntimePlugin/actions/workflows/build.yml/badge.svg)](https://github.com/Xpdustry/KotlinRuntimePlugin/actions/workflows/build.yml)
 [![Mindustry 6.0 | 7.0 ](https://img.shields.io/badge/Mindustry-6.0%20%7C%207.0-ffd37f)](https://github.com/Anuken/Mindustry/releases)
-[![Xpdustry latest](https://repo.xpdustry.fr/api/badge/latest/releases/fr/xpdustry/kotlin-runtime-plugin?color=00FFFF&name=TemplatePlugin&prefix=v)](https://github.com/Xpdustry/KotlinRuntimePlugin/releases)
+[![Xpdustry latest](https://repo.xpdustry.fr/api/badge/latest/releases/fr/xpdustry/kotlin-stdlib?color=00FFFF&name=KotlinRuntimePlugin&prefix=v)](https://github.com/Xpdustry/KotlinRuntimePlugin/releases)
 
 ## Description
 
