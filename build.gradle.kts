@@ -101,11 +101,6 @@ allprojects {
     }
 
     indra {
-        javaVersions {
-            target(17)
-            minimumToolchain(17)
-        }
-
         publishReleasesTo("xpdustry", "https://repo.xpdustry.fr/releases")
         publishSnapshotsTo("xpdustry", "https://repo.xpdustry.fr/snapshots")
 
