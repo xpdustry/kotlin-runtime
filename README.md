@@ -6,7 +6,7 @@
 
 ## Description
 
-This plugin provides the kotlin (1.6.10) librairies for Kotlin plugins :
+This plugin provides the kotlin (1.6.10) libraries for Kotlin plugins :
 
 - `xpdustry-kotlin-stdlib`
 
