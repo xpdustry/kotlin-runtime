@@ -15,7 +15,7 @@ If you want to use other kotlin core libraries, don't mind opening an issue, so 
 
 ## Requirements
 
-This plugin requires Mindustry v140 or later and Java 17 or later.
+This plugin requires Mindustry v141 or later and Java 17 or later.
 
 ## Building
 
