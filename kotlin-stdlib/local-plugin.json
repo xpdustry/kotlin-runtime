@@ -1,7 +1,0 @@
-{
-  "name": "xpdustry-kotlin-stdlib",
-  "displayName": "Kotlin standard library",
-  "description": "This plugin contains the kotlin-stdlib library necessary for Kotlin plugins.",
-  "main": "fr.xpdustry.kotlin.KotlinStandardLibraryPlugin",
-  "dependencies": []
-}

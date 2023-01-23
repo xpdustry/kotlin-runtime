@@ -1,8 +1,0 @@
-{
-  "version": "1.0.0",
-  "author": "Xpdustry",
-  "minGameVersion": "v126.2",
-  "hidden": true,
-  "java": true,
-  "repo": "Xpdustry/KotlinRuntimePlugin"
-}

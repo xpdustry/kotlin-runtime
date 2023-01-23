@@ -1,0 +1,13 @@
+{
+  "name": "kotlin-runtime",
+  "displayName": "KotlinRuntimePlugin",
+  "author": "Xpdustry",
+  "description": "A companion plugin for Kotlin based plugins.",
+  "version": "2.0.0-k.1.8.0",
+  "minGameVersion": "140",
+  "hidden": true,
+  "java": true,
+  "main": "fr.xpdustry.kotlin.KotlinRuntimePlugin",
+  "repo": "Xpdustry/KotlinRuntimePlugin",
+  "dependencies": []
+}

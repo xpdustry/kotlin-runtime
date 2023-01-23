@@ -1,129 +1,134 @@
-import groovy.json.JsonSlurper
-import java.io.File
-import fr.xpdustry.toxopid.extension.ModTarget
-import net.ltgt.gradle.errorprone.CheckSeverity
-import net.ltgt.gradle.errorprone.errorprone
-import java.io.ByteArrayOutputStream
+import fr.xpdustry.toxopid.dsl.anukenJitpack
+import fr.xpdustry.toxopid.dsl.mindustryDependencies
+import fr.xpdustry.toxopid.spec.ModMetadata
+import fr.xpdustry.toxopid.spec.ModPlatform
 
 plugins {
-    id("net.kyori.indra") version "2.1.1"
-    id("net.kyori.indra.publishing") version "2.1.1"
-    kotlin("jvm") version "1.6.10"
-    id("com.github.ben-manes.versions") version "0.42.0"
-    id("net.ltgt.errorprone") version "2.0.2"
-    id("fr.xpdustry.toxopid") version "1.3.2"
+    kotlin("jvm") version "1.8.0"
+    id("com.diffplug.spotless") version "6.11.0"
+    id("net.kyori.indra") version "3.0.1"
+    id("net.kyori.indra.publishing") version "3.0.1"
+    id("net.kyori.indra.git") version "3.0.1"
+    id("net.kyori.indra.licenser.spotless") version "3.0.1"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("fr.xpdustry.toxopid") version "3.0.0"
 }
 
-@Suppress("UNCHECKED_CAST")
-fun readJson(file: File): MutableMap<String, Any> = JsonSlurper().parse(file) as MutableMap<String, Any>
+val metadata = ModMetadata.fromJson(file("plugin.json").readText())
+group = "fr.xpdustry"
+if (indraGit.headTag() == null) {
+    metadata.version += "-SNAPSHOT"
+}
+version = metadata.version
+description = metadata.description
 
-val parentMetadata = readJson(file("$rootDir/global-plugin.json"))
+toxopid {
+    compileVersion.set("v" + metadata.minGameVersion)
+    platforms.set(setOf(ModPlatform.HEADLESS))
+}
 
-group = property("props.project-group").toString()
-version = (parentMetadata["version"] as String) + if (indraGit.headTag() == null) "-SNAPSHOT" else ""
-description = "The kotlin runtime baby !"
+repositories {
+    mavenCentral()
+    anukenJitpack()
+}
 
-tasks.create("createRelease") {
-    dependsOn("requireClean")
+dependencies {
+    mindustryDependencies()
+    api(kotlin("stdlib"))
+    api(kotlin("reflect"))
 
-    doLast {
-        // Checks if a signing key is present
-        val signing = ByteArrayOutputStream().use { out ->
-            exec {
-                commandLine("git", "config", "--global", "user.signingkey")
-                standardOutput = out
-            }.run { exitValue == 0 && out.toString().isNotBlank() }
-        }
+    val junit = "5.9.0"
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$junit")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junit")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit")
+}
 
-        exec {
-            commandLine(arrayListOf("git", "tag", "v${parentMetadata["version"]}", "-F", "./CHANGELOG.md", "-a").apply { if (signing) add("-s") })
-        }
+// Required for the GitHub actions
+tasks.register("getArtifactPath") {
+    doLast { println(tasks.shadowJar.get().archiveFile.get().toString()) }
+}
 
-        exec {
-            commandLine("git", "push", "origin", "--tags")
-        }
+tasks.shadowJar {
+    // Makes sure the name of the final jar is (plugin-display-name).jar
+    archiveFileName.set(metadata.displayName + ".jar")
+    // Set the classifier to plugin for publication on a maven repository
+    archiveClassifier.set("plugin")
+    // Include the plugin.json file with the modified version
+    doFirst {
+        val temp = temporaryDir.resolve("plugin.json")
+        temp.writeText(metadata.toJson(true))
+        from(temp)
+    }
+    // Include the license of your project
+    from(rootProject.file("LICENSE.md")) {
+        into("META-INF")
     }
 }
 
-rootProject.tasks.withType<AbstractPublishToMaven> { enabled = false }
+tasks.build {
+    // Make sure the shadow jar is built during the build task
+    dependsOn(tasks.shadowJar)
+}
 
-subprojects {
-    apply(plugin = "net.kyori.indra")
-    apply(plugin = "net.kyori.indra.publishing")
-    apply(plugin = "net.ltgt.errorprone")
-    apply(plugin = "fr.xpdustry.toxopid")
-    apply(plugin = "org.jetbrains.kotlin.jvm")
+signing {
+    val signingKey: String? by project
+    val signingPassword: String? by project
+    useInMemoryPgpKeys(signingKey, signingPassword)
+}
 
-    toxopid {
-        modTarget.set(ModTarget.HEADLESS)
-        val compileVersion = parentMetadata["minGameVersion"] as String
-        arcCompileVersion.set(compileVersion)
-        mindustryCompileVersion.set(compileVersion)
+indra {
+    javaVersions {
+        target(17)
+        minimumToolchain(17)
     }
 
-    repositories {
-        mavenCentral()
-    }
+    publishSnapshotsTo("xpdustry", "https://maven.xpdustry.fr/snapshots")
+    publishReleasesTo("xpdustry", "https://maven.xpdustry.fr/releases")
 
-    dependencies {
-        val jetbrains = "23.0.0"
-        compileOnly("org.jetbrains:annotations:$jetbrains")
-        testCompileOnly("org.jetbrains:annotations:$jetbrains")
+    // The license of your project, kyori has already functions for the most common licenses
+    // such as gpl3OnlyLicense() for GPLv3, apache2License() for Apache 2.0, etc.
+    // You can still specify your own license using the license { } builder function.
+    mitLicense()
 
-        // Static analysis
-        annotationProcessor("com.uber.nullaway:nullaway:0.9.5")
-        errorprone("com.google.errorprone:error_prone_core:2.11.0")
-    }
-
-    tasks.withType(JavaCompile::class.java).configureEach {
-        options.errorprone {
-            disableWarningsInGeneratedCode.set(true)
-            disable("MissingSummary")
-            if (!name.contains("test", true)) {
-                check("NullAway", CheckSeverity.ERROR)
-                option("NullAway:AnnotatedPackages", project.property("props.root-package").toString())
-            }
+    if (metadata.repo.isNotBlank()) {
+        val repo = metadata.repo.split("/")
+        github(repo[0], repo[1]) {
+            ci(true)
+            issues(true)
+            scm(true)
         }
     }
 
-    tasks.named<Jar>("shadowJar") {
-        val file = temporaryDir.resolve("plugin.json")
-        val localMetadata = readJson(file("$projectDir/local-plugin.json"))
-        file.writeText(groovy.json.JsonBuilder(localMetadata + parentMetadata).toPrettyString())
-        from(file)
-    }
-
-    tasks.create("getArtifactPath") {
-        doLast { println(tasks.shadowJar.get().archiveFile.get().toString()) }
-    }
-
-    signing {
-        val signingKey: String? by project
-        val signingPassword: String? by project
-        useInMemoryPgpKeys(signingKey, signingPassword)
-    }
-
-    indra {
-        publishReleasesTo("xpdustry", "https://repo.xpdustry.fr/releases")
-        publishSnapshotsTo("xpdustry", "https://repo.xpdustry.fr/snapshots")
-
-        mitLicense()
-
-        if (parentMetadata["repo"] != null) {
-            val repo = (parentMetadata["repo"] as String).split("/")
-            github(repo[0], repo[1]) {
-                ci(true)
-                issues(true)
-                scm(true)
+    configurePublications {
+        pom {
+            organization {
+                name.set("Xpdustry")
+                url.set("https://www.xpdustry.fr")
             }
-        }
 
-        configurePublications {
-            pom {
-                developers {
-                    developer { id.set(parentMetadata["author"] as String) }
+            developers {
+                developer {
+                    id.set(metadata.author)
                 }
             }
         }
     }
+}
+
+spotless {
+    kotlin {
+        ktlint()
+    }
+    kotlinGradle {
+        ktlint()
+    }
+}
+
+indraSpotlessLicenser {
+    licenseHeaderFile(rootProject.file("LICENSE_HEADER.md"))
+    // Some properties to make updating the licence header easier
+    property("NAME", metadata.displayName)
+    property("DESCRIPTION", metadata.description)
+    property("AUTHOR", metadata.author)
+    property("YEAR", "2022")
 }

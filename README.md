@@ -1,31 +1,24 @@
 #  KotlinRuntimePlugin
 
-[![Build](https://github.com/Xpdustry/KotlinRuntimePlugin/actions/workflows/build.yml/badge.svg)](https://github.com/Xpdustry/KotlinRuntimePlugin/actions/workflows/build.yml)
-[![Mindustry 6.0 | 7.0 ](https://img.shields.io/badge/Mindustry-6.0%20%7C%207.0-ffd37f)](https://github.com/Anuken/Mindustry/releases)
-[![Xpdustry latest](https://repo.xpdustry.fr/api/badge/latest/releases/fr/xpdustry/kotlin-stdlib?color=00FFFF&name=KotlinRuntimePlugin&prefix=v)](https://github.com/Xpdustry/KotlinRuntimePlugin/releases)
+[![Xpdustry latest](https://maven.xpdustry.fr/api/badge/latest/releases/fr/xpdustry/kotlin-runtime?color=00ced1&name=KotlinRuntimePlugin&prefix=v)](https://maven.xpdustry.fr/#/releases/fr/xpdustry/kotlin-runtime)
+[![Downloads](https://img.shields.io/github/downloads/Xpdustry/KotlinRuntimePlugin/total?color=00ced1)](https://github.com/Xpdustry/KotlinRuntimePlugin/releases)
+[![Mindustry 7.0](https://img.shields.io/badge/Mindustry-7.0-00ced1)](https://github.com/Anuken/Mindustry/releases)
 
 ## Description
 
-This plugin provides the kotlin (1.6.10) libraries for Kotlin plugins :
+This plugin allows you to write kotlin plugins without having to ship the kotlin runtime with your plugin. Thus avoiding conflicts with other plugins. It currently comes with version 1.8.0 and the following libraries :
 
-- `xpdustry-kotlin-stdlib`
+- The standard library
+- The reflection library
 
-- `xpdustry-kotlin-refeflect`
+If you want to use other kotlin core libraries, don't mind opening an issue, so I can add them in this plugin.
+
+## Requirements
+
+This plugin requires Mindustry v140 or later and Java 17 or later.
 
 ## Building
 
-- `./gradlew jar` for a simple jar that contains only the plugin code.
-
-- `./gradlew shadowJar` for a fatJar that contains the plugin and its dependencies (use this for your server).
-
-## Testing
-
-- `./gradlew runMindustryClient`: Run Mindustry in desktop with the plugin.
-
-- `./gradlew runMindustryServer`: Run Mindustry in a server with the plugin.
-
-## Running
-
-This plugin is compatible with V6 and V7.
-
-If you run on V6 or V7 up to v135, you will need [mod-loader](https://github.com/Xpdustry/ModLoaderPlugin).
+- `./gradlew shadowJar` to only compile the plugin (it will be located at `/build/libs/KotlinRuntimePlugin.jar`).
+- `./gradlew runMindustryServer` to run the plugin in a local Mindustry server.
+- `./gradlew runMindustryClient` to run a local Mindustry client.

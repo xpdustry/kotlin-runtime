@@ -1,9 +1,0 @@
-{
-  "name": "xpdustry-kotlin-reflect",
-  "displayName": "Kotlin reflection library",
-  "description": "This plugin contains the kotlin-reflect library necessary for some Kotlin plugins.",
-  "main": "fr.xpdustry.kotlin.KotlinReflectPlugin",
-  "dependencies": [
-    "xpdustry-kotlin-stdlib"
-  ]
-}
