@@ -31,6 +31,6 @@ import mindustry.mod.Plugin
 @Suppress("unused")
 class KotlinRuntimePlugin : Plugin() {
     init {
-        Log.infoTag("KotlinRuntimePlugin", "The kotlin runtime v1.8.0 is available.")
+        Log.infoTag("KotlinRuntimePlugin", "The kotlin runtime v${KotlinVersion.CURRENT} is available.")
     }
 }

@@ -4,14 +4,14 @@ import fr.xpdustry.toxopid.spec.ModMetadata
 import fr.xpdustry.toxopid.spec.ModPlatform
 
 plugins {
-    kotlin("jvm") version "1.8.0"
+    kotlin("jvm") version "1.8.20"
     id("com.diffplug.spotless") version "6.11.0"
     id("net.kyori.indra") version "3.0.1"
     id("net.kyori.indra.publishing") version "3.0.1"
     id("net.kyori.indra.git") version "3.0.1"
     id("net.kyori.indra.licenser.spotless") version "3.0.1"
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("fr.xpdustry.toxopid") version "3.0.0"
+    id("fr.xpdustry.toxopid") version "3.1.0"
 }
 
 val metadata = ModMetadata.fromJson(file("plugin.json").readText())
