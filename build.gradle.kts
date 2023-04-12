@@ -130,5 +130,5 @@ indraSpotlessLicenser {
     property("NAME", metadata.displayName)
     property("DESCRIPTION", metadata.description)
     property("AUTHOR", metadata.author)
-    property("YEAR", "2022")
+    property("YEAR", "2023")
 }
