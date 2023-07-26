@@ -1,7 +1,7 @@
 #  kotlin-runtime
 
-[![Xpdustry latest](https://maven.xpdustry.fr/api/badge/latest/releases/fr/xpdustry/kotlin-runtime?color=00ced1&name=kotlin-runtime&prefix=v)](https://maven.xpdustry.fr/#/releases/fr/xpdustry/kotlin-runtime)
-[![Downloads](https://img.shields.io/github/downloads/Xpdustry/KotlinRuntimePlugin/total?color=00ced1)](https://github.com/Xpdustry/KotlinRuntimePlugin/releases)
+[![Xpdustry latest](https://maven.xpdustry.fr/api/badge/latest/releases/com/xpdustry/kotlin-runtime?color=00ced1&name=kotlin-runtime&prefix=v)](https://maven.xpdustry.fr/#/releases/com/xpdustry/kotlin-runtime)
+[![Downloads](https://img.shields.io/github/downloads/Xpdustry/KotlinRuntimePlugin/total?color=00ced1)](https://github.com/xpdustry/kotlin-runtime/releases)
 [![Mindustry 7.0](https://img.shields.io/badge/Mindustry-7.0-00ced1)](https://github.com/Anuken/Mindustry/releases)
 
 ## Description
