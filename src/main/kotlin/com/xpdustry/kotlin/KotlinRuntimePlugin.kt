@@ -23,7 +23,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package fr.xpdustry.kotlin
+package com.xpdustry.kotlin
 
 import arc.util.Log
 import mindustry.mod.Plugin

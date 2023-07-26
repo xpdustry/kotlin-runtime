@@ -1,21 +1,21 @@
-import fr.xpdustry.toxopid.dsl.anukenJitpack
 import fr.xpdustry.toxopid.dsl.mindustryDependencies
 import fr.xpdustry.toxopid.spec.ModMetadata
 import fr.xpdustry.toxopid.spec.ModPlatform
 
 plugins {
-    kotlin("jvm") version "1.8.20"
-    id("com.diffplug.spotless") version "6.11.0"
-    id("net.kyori.indra") version "3.0.1"
-    id("net.kyori.indra.publishing") version "3.0.1"
-    id("net.kyori.indra.git") version "3.0.1"
-    id("net.kyori.indra.licenser.spotless") version "3.0.1"
-    id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("fr.xpdustry.toxopid") version "3.1.0"
+    kotlin("jvm") version "1.9.0"
+    id("com.diffplug.spotless") version "6.20.0"
+    id("net.kyori.indra") version "3.1.2"
+    id("net.kyori.indra.publishing") version "3.1.2"
+    id("net.kyori.indra.git") version "3.1.2"
+    id("net.kyori.indra.licenser.spotless") version "3.1.2"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("fr.xpdustry.toxopid") version "3.2.0"
+    id("com.github.ben-manes.versions") version "0.47.0"
 }
 
 val metadata = ModMetadata.fromJson(file("plugin.json").readText())
-group = "fr.xpdustry"
+group = "com.xpdustry"
 if (indraGit.headTag() == null) {
     metadata.version += "-SNAPSHOT"
 }
@@ -25,22 +25,21 @@ description = metadata.description
 toxopid {
     compileVersion.set("v" + metadata.minGameVersion)
     platforms.set(setOf(ModPlatform.HEADLESS))
+    useMindustryMirror.set(true)
 }
 
 repositories {
     mavenCentral()
-    anukenJitpack()
+    maven("https://maven.xpdustry.fr/anuken") {
+        name = "xpdustry-anuken"
+        mavenContent { releasesOnly() }
+    }
 }
 
 dependencies {
     mindustryDependencies()
     api(kotlin("stdlib"))
     api(kotlin("reflect"))
-
-    val junit = "5.9.0"
-    testImplementation("org.junit.jupiter:junit-jupiter-params:$junit")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:$junit")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit")
 }
 
 // Required for the GitHub actions
@@ -49,8 +48,7 @@ tasks.register("getArtifactPath") {
 }
 
 tasks.shadowJar {
-    // Makes sure the name of the final jar is (plugin-display-name).jar
-    archiveFileName.set(metadata.displayName + ".jar")
+    archiveFileName.set("kotlin-runtime.jar")
     // Set the classifier to plugin for publication on a maven repository
     archiveClassifier.set("plugin")
     // Include the plugin.json file with the modified version
