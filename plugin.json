@@ -3,7 +3,7 @@
   "displayName": "KotlinRuntime",
   "author": "xpdustry",
   "description": "A companion plugin for Kotlin based plugins.",
-  "version": "3.0.0-k.1.9.0",
+  "version": "3.0.1-k.1.9.0",
   "minGameVersion": "145",
   "hidden": true,
   "java": true,
