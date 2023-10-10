@@ -25,13 +25,12 @@ description = metadata.description
 toxopid {
     compileVersion.set("v" + metadata.minGameVersion)
     platforms.set(setOf(ModPlatform.HEADLESS))
-    useMindustryMirror.set(true)
 }
 
 repositories {
     mavenCentral()
-    maven("https://maven.xpdustry.com/anuken") {
-        name = "xpdustry-anuken"
+    maven("https://maven.xpdustry.com/mindustry") {
+        name = "xpdustry-mindustry"
         mavenContent { releasesOnly() }
     }
 }

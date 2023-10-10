@@ -4,7 +4,7 @@
   "author": "xpdustry",
   "description": "A companion plugin for Kotlin based plugins.",
   "version": "3.1.0-k.1.9.10",
-  "minGameVersion": "145",
+  "minGameVersion": "146",
   "hidden": true,
   "java": true,
   "main": "com.xpdustry.kotlin.KotlinRuntimePlugin",
