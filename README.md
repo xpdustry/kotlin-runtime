@@ -8,7 +8,7 @@
 
 This plugin allows you to write kotlin plugins without having to ship the kotlin runtime.
 Thus avoiding conflicts with other plugins.
-It currently comes with kotlin version 1.9.0 and the following libraries :
+It currently comes with kotlin version 1.9.10 and the following libraries :
 
 - The standard library
 - The reflection library

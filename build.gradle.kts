@@ -3,7 +3,7 @@ import fr.xpdustry.toxopid.spec.ModMetadata
 import fr.xpdustry.toxopid.spec.ModPlatform
 
 plugins {
-    kotlin("jvm") version "1.9.0"
+    kotlin("jvm") version "1.9.10"
     id("com.diffplug.spotless") version "6.22.0"
     id("net.kyori.indra") version "3.1.3"
     id("net.kyori.indra.publishing") version "3.1.3"
