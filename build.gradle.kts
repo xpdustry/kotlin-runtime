@@ -108,7 +108,8 @@ indra {
 
             developers {
                 developer {
-                    id.set(metadata.author)
+                    id.set("Phinner")
+                    timezone.set("Europe/Brussels")
                 }
             }
         }
@@ -129,6 +130,6 @@ indraSpotlessLicenser {
     // Some properties to make updating the licence header easier
     property("NAME", metadata.displayName)
     property("DESCRIPTION", metadata.description)
-    property("AUTHOR", metadata.author)
+    property("AUTHOR", "Xpdustry")
     property("YEAR", "2023")
 }
