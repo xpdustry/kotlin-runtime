@@ -38,8 +38,10 @@ repositories {
 
 dependencies {
     mindustryDependencies()
-    api(kotlin("stdlib"))
+    api(kotlin("stdlib-jdk8"))
     api(kotlin("reflect"))
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.7.3")
 }
 
 // Required for the GitHub actions

@@ -12,6 +12,7 @@ It currently comes with kotlin version 1.9.0 and the following libraries :
 
 - The standard library
 - The reflection library
+- The coroutines library
 
 If you want to use other kotlin libraries, don't mind opening an issue.
 
