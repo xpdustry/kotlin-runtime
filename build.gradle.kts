@@ -69,6 +69,12 @@ tasks.build {
     dependsOn(tasks.shadowJar)
 }
 
+// Kyori enables javadoc, but we don't want that with a Kotlin project
+tasks.javadocJar {
+    enabled = false
+    outputs.files()
+}
+
 signing {
     val signingKey: String? by project
     val signingPassword: String? by project
