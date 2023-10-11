@@ -30,8 +30,8 @@ import mindustry.mod.Plugin
 
 @Suppress("unused")
 class KotlinRuntimePlugin : Plugin() {
-    init {
-        Log.info("[KotlinRuntime] Kotlin stdlib and reflect (v@) are now available.", KotlinVersion.CURRENT)
-        Log.info("[KotlinRuntime] Kotlin coroutines (v@) are now available.", "1.7.3")
+    override fun init() {
+        Log.info("&lb&fb[KotlinRuntime]&fr Kotlin stdlib and reflect (@) are now available.", "v" + KotlinVersion.CURRENT)
+        Log.info("&lb&fb[KotlinRuntime]&fr Kotlin coroutines (@) are now available.", "v1.7.3")
     }
 }
