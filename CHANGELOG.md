@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v3.1.0-k.1.9.10 - 2023-10-11
+
+### Added
+
+- Added Kotlin coroutines `v1.7.3`.
+
+### Chores
+
+- Bumped version of everything, including Kotlin to `1.9.10` and Mindustry to `v146`.
+- Completely removed javadoc.
+- Moved plugin init message inside Plugin#init`.
+- Changed plugin logging name from KotlinRuntimePlugin to KotlinRuntime.
+
 ## v3.0.0-k.1.9.0 - 2023-07-26
 
 ### Changes
