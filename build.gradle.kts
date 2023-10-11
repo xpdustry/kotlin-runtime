@@ -69,10 +69,12 @@ tasks.build {
     dependsOn(tasks.shadowJar)
 }
 
-// Kyori enables javadoc, but we don't want that with a Kotlin project
-tasks.javadocJar {
-    enabled = false
-    outputs.files()
+// Indra adds the javadoc task, we don't want that so disable it
+components.named("java") {
+    val component = this as AdhocComponentWithVariants
+    component.withVariantsFromConfiguration(configurations.javadocElements.get()) {
+        skip()
+    }
 }
 
 signing {
