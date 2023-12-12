@@ -16,6 +16,24 @@ It currently comes with kotlin version 1.9.10 and the following libraries :
 
 If you want to use other kotlin libraries, don't mind opening an issue.
 
+## Usage
+
+Besides downloading this plugin alongside yours,
+you need to also make sure you do not include the kotlin stdlib when compiling your plugin.
+To do so, just add the following in your build script:
+
+```gradle
+configurations.runtimeClasspath {
+    exclude("org.jetbrains.kotlin", "kotlin-stdlib")
+    exclude("org.jetbrains.kotlin", "kotlin-stdlib-common")
+    exclude("org.jetbrains.kotlin", "kotlin-stdlib-jdk8")
+    exclude("org.jetbrains.kotlin", "kotlin-reflect")
+    // Add the following lines if you use coroutines
+    exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
+    exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
+}
+```
+
 ## Requirements
 
 This plugin requires Mindustry v145 or later and Java 17 or later.
