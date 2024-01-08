@@ -3,15 +3,15 @@ import fr.xpdustry.toxopid.spec.ModMetadata
 import fr.xpdustry.toxopid.spec.ModPlatform
 
 plugins {
-    kotlin("jvm") version "1.9.10"
-    id("com.diffplug.spotless") version "6.22.0"
+    kotlin("jvm") version "1.9.22"
+    id("com.diffplug.spotless") version "6.23.3"
     id("net.kyori.indra") version "3.1.3"
     id("net.kyori.indra.publishing") version "3.1.3"
     id("net.kyori.indra.git") version "3.1.3"
     id("net.kyori.indra.licenser.spotless") version "3.1.3"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("fr.xpdustry.toxopid") version "3.2.0"
-    id("com.github.ben-manes.versions") version "0.49.0"
+    id("com.github.ben-manes.versions") version "0.50.0"
 }
 
 val metadata = ModMetadata.fromJson(file("plugin.json").readText())
@@ -74,6 +74,18 @@ components.named("java") {
     val component = this as AdhocComponentWithVariants
     component.withVariantsFromConfiguration(configurations.javadocElements.get()) {
         skip()
+    }
+}
+
+tasks.dependencyUpdates {
+    fun isNonStable(version: String): Boolean {
+        val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.uppercase().contains(it) }
+        val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+        val isStable = stableKeyword || regex.matches(version)
+        return isStable.not()
+    }
+    rejectVersionIf {
+        isNonStable(candidate.version) && !isNonStable(currentVersion)
     }
 }
 
