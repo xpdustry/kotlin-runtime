@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v3.2.0-k.1.9.23 - 2024-03-30
+
+### Added
+
+- Added Kotlin serialization library (json).
+
+### Chores
+
+- Bumped version of everything, including Kotlin to `1.9.23` and Coroutines to `1.8.0`.
+
 ## v3.1.1-k.1.9.22 - 2024-01-08
 
 ### Chores
