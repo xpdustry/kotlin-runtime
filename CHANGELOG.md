@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v3.1.1-k.1.9.22 - 2024-01-08
+
+### Chores
+
+- Bump Kotlin to `1.9.22`.
+- Bump several dependencies.
+
 ## v3.1.0-k.1.9.10 - 2023-10-11
 
 ### Added
