@@ -3,15 +3,16 @@ import fr.xpdustry.toxopid.spec.ModMetadata
 import fr.xpdustry.toxopid.spec.ModPlatform
 
 plugins {
-    kotlin("jvm") version "1.9.22"
-    id("com.diffplug.spotless") version "6.23.3"
+    kotlin("jvm") version "1.9.23"
+    kotlin("plugin.serialization") version "1.9.23"
+    id("com.diffplug.spotless") version "6.25.0"
     id("net.kyori.indra") version "3.1.3"
     id("net.kyori.indra.publishing") version "3.1.3"
     id("net.kyori.indra.git") version "3.1.3"
     id("net.kyori.indra.licenser.spotless") version "3.1.3"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("fr.xpdustry.toxopid") version "3.2.0"
-    id("com.github.ben-manes.versions") version "0.50.0"
+    id("com.github.ben-manes.versions") version "0.51.0"
 }
 
 val metadata = ModMetadata.fromJson(file("plugin.json").readText())
@@ -39,8 +40,9 @@ dependencies {
     mindustryDependencies()
     api(kotlin("stdlib-jdk8"))
     api(kotlin("reflect"))
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.7.3")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.8.0")
+    api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 }
 
 // Required for the GitHub actions

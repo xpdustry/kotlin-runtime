@@ -31,6 +31,8 @@ configurations.runtimeClasspath {
     // Add the following lines if you use coroutines
     exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
     exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
+    // Add the following line if you use serialization json
+    exclude("org.jetbrains.kotlinx", "kotlinx-serialization-json")
 }
 ```
 
