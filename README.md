@@ -13,6 +13,7 @@ It currently comes with kotlin version 1.9.10 and the following libraries :
 - The standard library
 - The reflection library
 - The coroutines library
+- The serialization library (json only)
 
 If you want to use other kotlin libraries, don't mind opening an issue.
 
