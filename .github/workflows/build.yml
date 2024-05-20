@@ -9,7 +9,7 @@ on:
     types: [ released ]
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  group: "${{ github.workflow }}-${{ github.event.number || github.ref }}"
   cancel-in-progress: true
 
 jobs:
