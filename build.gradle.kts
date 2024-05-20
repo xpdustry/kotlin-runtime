@@ -10,7 +10,6 @@ plugins {
     id("net.kyori.indra") version libs.versions.indra
     id("net.kyori.indra.publishing") version libs.versions.indra
     id("net.kyori.indra.git") version libs.versions.indra
-    id("net.kyori.indra.licenser.spotless") version libs.versions.indra
     id("com.github.johnrengelman.shadow") version libs.versions.shadow
     id("fr.xpdustry.toxopid") version libs.versions.toxopid
     id("com.github.ben-manes.versions") version libs.versions.versions
@@ -152,17 +151,9 @@ indra {
 spotless {
     kotlin {
         ktlint()
+        licenseHeaderFile(rootProject.file("HEADER.txt"))
     }
     kotlinGradle {
         ktlint()
     }
-}
-
-indraSpotlessLicenser {
-    licenseHeaderFile(rootProject.file("LICENSE_HEADER.md"))
-    // Some properties to make updating the licence header easier
-    property("NAME", metadata.displayName)
-    property("DESCRIPTION", metadata.description)
-    property("AUTHOR", "Xpdustry")
-    property("YEAR", "2023")
 }
