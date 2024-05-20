@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v3.2.1-k.1.9.24 - 2024-05-20
+
+### Chores
+
+- Updated kotlin to `1.9.24` and coroutines to `1.8.1`.
+
+### Fix
+
+- Fix misleading version on plugin start.
+
 ## v3.2.0-k.1.9.23 - 2024-03-30
 
 ### Added
