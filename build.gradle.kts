@@ -18,6 +18,7 @@ plugins {
 
 val metadata = ModMetadata.fromJson(file("plugin.json").readText())
 group = "com.xpdustry"
+metadata.version += "-k." + libs.versions.kotlin.get()
 if (indraGit.headTag() == null) {
     metadata.version += "-SNAPSHOT"
 }
