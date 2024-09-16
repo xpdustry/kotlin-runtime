@@ -15,7 +15,7 @@ It currently comes with kotlin version `2.0.20` and the following libraries :
 - The coroutines library
 - The serialization library (json only)
 
-If you want to use other kotlin libraries, don't mind opening an issue.
+If you want to use other kotlin libraries, don't mind creating an issue.
 
 ## Usage
 
