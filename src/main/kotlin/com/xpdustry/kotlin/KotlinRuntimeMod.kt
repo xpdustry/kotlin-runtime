@@ -26,14 +26,14 @@
 package com.xpdustry.kotlin
 
 import arc.util.Log
-import mindustry.mod.Plugin
+import mindustry.mod.Mod
 import java.util.Properties
 
 @Suppress("unused")
-class KotlinRuntimePlugin : Plugin() {
+class KotlinRuntimeMod : Mod() {
     override fun init() {
         val properties = Properties()
-        javaClass.classLoader.getResourceAsStream("kotlin-runtime-versions.properties")!!.use { properties.load(it.reader()) }
+        javaClass.classLoader.getResourceAsStream("com/xpdustry/kotlin/versions.properties")!!.use { properties.load(it.reader()) }
         Log.debug("&lb&fb[KotlinRuntime]&fr Kotlin stdlib and reflect (@) are now available.", "v" + properties["kotlin.base"])
         Log.debug("&lb&fb[KotlinRuntime]&fr Kotlin coroutines (@) is now available.", "v" + properties["kotlinx.coroutines"])
         Log.debug("&lb&fb[KotlinRuntime]&fr Kotlin serialization (@) is now available.", "v" + properties["kotlinx.serialization"])

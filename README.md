@@ -6,9 +6,9 @@
 
 ## Description
 
-This plugin allows you to write kotlin plugins without having to ship the kotlin runtime.
-Thus avoiding conflicts with other plugins.
-It currently comes with kotlin version 1.9.10 and the following libraries :
+This mod allows you to write kotlin mods/plugins without having to ship the kotlin runtime.
+Thus avoiding conflicts with other mods/plugins.
+It currently comes with kotlin version `2.0.20` and the following libraries :
 
 - The standard library
 - The reflection library
@@ -19,9 +19,18 @@ If you want to use other kotlin libraries, don't mind opening an issue.
 
 ## Usage
 
-Besides downloading this plugin alongside yours,
-you need to also make sure you do not include the kotlin stdlib when compiling your plugin.
+Besides downloading this mod alongside your mod/plugin,
+you need to also make sure you do not include the kotlin stdlib when compiling your project.
 To do so, just add the following in your build script:
+
+````gradle
+configurations.runtimeClasspath {
+    exclude("org.jetbrains.kotlin")
+    exclude("org.jetbrains.kotlinx")
+}
+````
+
+Or if you need precise exclusions:
 
 ```gradle
 configurations.runtimeClasspath {

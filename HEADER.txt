@@ -1,5 +1,5 @@
 /*
- * This file is part of KotlinRuntime. A companion plugin for Kotlin based plugins.
+ * This file is part of KotlinRuntime. A companion mod for Kotlin based mods and plugins.
  *
  * MIT License
  *
