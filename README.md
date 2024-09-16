@@ -48,10 +48,13 @@ configurations.runtimeClasspath {
 
 ## Requirements
 
-This plugin requires Mindustry v145 or later and Java 17 or later.
+This mod requires Mindustry v145 or later and Java 8 or later.
 
 ## Building
 
 - `./gradlew shadowJar` to only compile the plugin (it will be located at `/build/libs/kotlin-runtime.jar`).
 - `./gradlew runMindustryServer` to run the plugin in a local Mindustry server.
 - `./gradlew runMindustryClient` to run a local Mindustry client.
+
+This mod also requires android platform 35 with build tools for compilation.
+You can easily install it using android studio SDK manager.

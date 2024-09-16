@@ -46,7 +46,7 @@ dependencies {
 
 // Required for the GitHub actions
 tasks.register("getArtifactPath") {
-    doLast { println(tasks.shadowJar.get().archiveFile.get().toString()) }
+    doLast { println(tasks.mergeJar.get().archiveFile.get().toString()) }
 }
 
 val generateResources =
@@ -79,8 +79,7 @@ tasks.mergeJar {
 }
 
 tasks.build {
-    // Make sure the shadow jar is built during the build task
-    dependsOn(tasks.shadowJar)
+    dependsOn(tasks.mergeJar)
 }
 
 // Indra adds the javadoc task, we don't want that so disable it
