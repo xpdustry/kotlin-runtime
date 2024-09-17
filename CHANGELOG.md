@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v4.0.0-k.2.0.20 - 2024-09-17
+
+### Features
+
+- The plugin is now a dexed mod, making it usable by plugins and mods, on any platform!
+
+### Chores
+
+- Updated kotlin to `2.0.20`, coroutines to `1.9.0` and serialization to `1.7.2`.
+
 ## v3.2.1-k.1.9.24 - 2024-05-20
 
 ### Chores
