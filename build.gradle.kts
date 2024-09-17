@@ -44,11 +44,6 @@ dependencies {
     api(libs.kotlinx.serialization.json)
 }
 
-// Required for the GitHub actions
-tasks.register("getArtifactPath") {
-    doLast { println(tasks.mergeJar.get().archiveFile.get().toString()) }
-}
-
 val generateResources =
     tasks.register("generateFiles") {
         outputs.files(fileTree(temporaryDir))
@@ -70,16 +65,17 @@ val generateResources =
     }
 
 tasks.shadowJar {
+    archiveClassifier = "mod"
     from(generateResources)
     from(rootProject.file("LICENSE.md")) { into("META-INF") }
 }
 
-tasks.dexJar {
-    d8Version = "8.5.10"
-}
-
 tasks.mergeJar {
     archiveFileName.set("kotlin-runtime.jar")
+}
+
+tasks.register("getArtifactPath") {
+    doLast { println(tasks.mergeJar.get().archiveFile.get().toString()) }
 }
 
 tasks.build {
