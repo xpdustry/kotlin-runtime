@@ -70,6 +70,10 @@ tasks.shadowJar {
     from(rootProject.file("LICENSE.md")) { into("META-INF") }
 }
 
+tasks.dexJar {
+    r8Version = "8.8.20"
+}
+
 tasks.mergeJar {
     archiveFileName.set("kotlin-runtime.jar")
 }
