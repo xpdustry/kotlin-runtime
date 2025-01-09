@@ -44,25 +44,24 @@ dependencies {
     api(libs.kotlinx.serialization.json)
 }
 
-val generateResources =
-    tasks.register("generateFiles") {
-        outputs.files(fileTree(temporaryDir))
+val generateResources = tasks.register("generateFiles") {
+    outputs.files(fileTree(temporaryDir))
 
-        doLast {
-            val temp = temporaryDir.resolve("plugin.json")
-            temp.writeText(ModMetadata.toJson(metadata, true))
-        }
-
-        doLast {
-            val temp = temporaryDir.resolve("com/xpdustry/kotlin/versions.properties")
-            val properties = Properties()
-            properties["kotlinx.coroutines"] = libs.versions.kotlinx.coroutines.get()
-            properties["kotlin.base"] = libs.versions.kotlin.get()
-            properties["kotlinx.serialization"] = libs.versions.kotlinx.serialization.get()
-            temp.parentFile.mkdirs()
-            temp.writer().use { properties.store(it, null) }
-        }
+    doLast {
+        val temp = temporaryDir.resolve("plugin.json")
+        temp.writeText(ModMetadata.toJson(metadata, true))
     }
+
+    doLast {
+        val temp = temporaryDir.resolve("com/xpdustry/kotlin/versions.properties")
+        val properties = Properties()
+        properties["kotlinx.coroutines"] = libs.versions.kotlinx.coroutines.get()
+        properties["kotlin.base"] = libs.versions.kotlin.get()
+        properties["kotlinx.serialization"] = libs.versions.kotlinx.serialization.get()
+        temp.parentFile.mkdirs()
+        temp.writer().use { properties.store(it, null) }
+    }
+}
 
 tasks.shadowJar {
     archiveClassifier = "mod"
