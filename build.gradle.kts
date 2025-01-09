@@ -75,7 +75,7 @@ tasks.dexJar {
 }
 
 tasks.mergeJar {
-    archiveFileName.set("kotlin-runtime.jar")
+    archiveFileName = "kotlin-runtime.jar"
 }
 
 tasks.register("getArtifactPath") {
@@ -137,10 +137,10 @@ indra {
 
 spotless {
     kotlin {
-        ktlint()
+        ktfmt().kotlinlangStyle()
         licenseHeaderFile(rootProject.file("HEADER.txt"))
     }
     kotlinGradle {
-        ktlint()
+        ktlint().editorConfigOverride(mapOf("ktlint_code_style" to "intellij_idea", "max_line_length" to "120"))
     }
 }
