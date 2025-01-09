@@ -48,7 +48,7 @@ val generateResources = tasks.register("generateFiles") {
     outputs.files(fileTree(temporaryDir))
 
     doLast {
-        val temp = temporaryDir.resolve("plugin.json")
+        val temp = temporaryDir.resolve("mod.json")
         temp.writeText(ModMetadata.toJson(metadata, true))
     }
 
