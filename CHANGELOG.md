@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v4.1.0-k.2.1.20 - 2025-03-24
+
+### Chores
+
+- Updated kotlin to `2.1.20`.
+
 ## v4.1.0-k.2.1.0 - 2025-01-09
 
 ### Bugfixes
