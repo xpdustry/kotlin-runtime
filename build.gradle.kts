@@ -70,7 +70,7 @@ tasks.shadowJar {
 }
 
 tasks.dexJar {
-    r8Version = "8.8.20"
+    r8Version = "8.10.21"
 }
 
 tasks.mergeJar {
