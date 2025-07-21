@@ -123,10 +123,14 @@ tasks.withType<MindustryExec> {
     mods.setFrom(downloadSlf4md, tasks.mergeJar)
 }
 
-// Indra adds the javadoc task, we don't want that so disable it
 components.named("java") {
     val component = this as AdhocComponentWithVariants
+    // Indra adds the javadoc task, we don't want that so disable it
     component.withVariantsFromConfiguration(configurations.javadocElements.get()) {
+        skip()
+    }
+    // The published shadow jar is incomplete so remove it
+    component.withVariantsFromConfiguration(configurations.shadowRuntimeElements.get()) {
         skip()
     }
 }
