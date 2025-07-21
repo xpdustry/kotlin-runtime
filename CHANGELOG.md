@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v4.3.0-k.2.2.0 - 2025-07-21
+
+### Changes
+
+- Added kotlinx datetime (for [essentials](https://github.com/Kieaer/Essentials)).
+- Added [slf4md](https://github.com/xpdustry/slf4md) compat (it will use its logger if possible).
+
 ## v4.2.0-k.2.2.0 - 2025-06-25
 
 ### Chores
