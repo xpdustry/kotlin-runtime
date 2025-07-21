@@ -3,11 +3,12 @@
   "displayName": "KotlinRuntime",
   "author": "Xpdustry",
   "description": "A companion mod for Kotlin based mods and plugins.",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "minGameVersion": "149",
   "hidden": true,
   "java": true,
   "main": "com.xpdustry.kotlin.KotlinRuntimeMod",
   "repo": "xpdustry/kotlin-runtime",
-  "dependencies": []
+  "dependencies": [],
+  "softDependencies": [ "slf4md" ]
 }

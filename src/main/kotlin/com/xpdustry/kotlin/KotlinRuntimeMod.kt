@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2024 Xpdustry
+ * Copyright (c) 2025 Xpdustry
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,31 +26,44 @@
 package com.xpdustry.kotlin
 
 import arc.util.Log
-import java.util.Properties
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.decodeFromStream
+import mindustry.Vars
 import mindustry.mod.Mod
 
 @Suppress("unused")
-class KotlinRuntimeMod : Mod() {
+internal class KotlinRuntimeMod : Mod() {
+
+    @OptIn(ExperimentalSerializationApi::class)
     override fun init() {
-        val properties = Properties()
-
-        javaClass.classLoader.getResourceAsStream("com/xpdustry/kotlin/versions.properties")!!.use {
-            properties.load(it.reader())
-        }
-
-        Log.debug(
-            "&lb&fb[KotlinRuntime]&fr Kotlin stdlib+reflect (@) is now available.",
-            "v" + properties["kotlin.base"],
-        )
-
-        Log.debug(
-            "&lb&fb[KotlinRuntime]&fr Kotlin coroutines (@) is now available.",
-            "v" + properties["kotlinx.coroutines"],
-        )
-
-        Log.debug(
-            "&lb&fb[KotlinRuntime]&fr Kotlin serialization (@) is now available.",
-            "v" + properties["kotlinx.serialization"],
-        )
+        Json.decodeFromStream<List<KotlinModule>>(
+                javaClass.classLoader.getResourceAsStream("com/xpdustry/kotlin/versions.json")!!
+            )
+            .forEach { module -> info("${module.name} ({}) is now available.", module.version) }
     }
+
+    private var failed = false
+
+    private fun info(message: String, vararg args: Any) {
+        if (!failed && Vars.mods.getMod("slf4md") != null) {
+            try {
+                val logger =
+                    Class.forName("org.slf4j.LoggerFactory")
+                        .getDeclaredMethod("getLogger", Class::class.java)
+                        .invoke(null, KotlinRuntimeMod::class.java)
+                Class.forName("org.slf4j.Logger")
+                    .getDeclaredMethod("info", String::class.java, Array<Any>::class.java)
+                    .invoke(logger, message, args)
+                return
+            } catch (e: Exception) {
+                failed = true
+                Log.err("Failed to use slf4md logger", e)
+            }
+        }
+        Log.info("&lb&fb[KotlinRuntime]&fr " + message.replace("{}", "@"), *args)
+    }
+
+    @Serializable private data class KotlinModule(val name: String, val version: String)
 }

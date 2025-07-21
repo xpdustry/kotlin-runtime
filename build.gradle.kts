@@ -1,15 +1,26 @@
 import com.xpdustry.toxopid.spec.ModMetadata
 import com.xpdustry.toxopid.spec.ModPlatform
-import java.util.Properties
+import com.xpdustry.toxopid.task.GithubAssetDownload
+import com.xpdustry.toxopid.task.MindustryExec
+import kotlinx.serialization.json.addJsonObject
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.put
 
 plugins {
-    alias(libs.plugins.kotlin)
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.spotless)
     alias(libs.plugins.indra.common)
     alias(libs.plugins.indra.git)
     alias(libs.plugins.indra.publishing)
     alias(libs.plugins.shadow)
     alias(libs.plugins.toxopid)
+}
+
+buildscript {
+    dependencies {
+        classpath(libs.kotlinx.serialization.json)
+    }
 }
 
 val metadata = ModMetadata.fromJson(file("mod.json"))
@@ -42,6 +53,7 @@ dependencies {
     api(libs.kotlinx.coroutines.core)
     api(libs.kotlinx.coroutines.jdk8)
     api(libs.kotlinx.serialization.json)
+    api(libs.kotlinx.datetime)
 }
 
 val generateResources = tasks.register("generateFiles") {
@@ -53,18 +65,32 @@ val generateResources = tasks.register("generateFiles") {
     }
 
     doLast {
-        val temp = temporaryDir.resolve("com/xpdustry/kotlin/versions.properties")
-        val properties = Properties()
-        properties["kotlinx.coroutines"] = libs.versions.kotlinx.coroutines.get()
-        properties["kotlin.base"] = libs.versions.kotlin.get()
-        properties["kotlinx.serialization"] = libs.versions.kotlinx.serialization.get()
+        val temp = temporaryDir.resolve("com/xpdustry/kotlin/versions.json")
         temp.parentFile.mkdirs()
-        temp.writer().use { properties.store(it, null) }
+        temp.writeText(
+            buildJsonArray {
+                addJsonObject {
+                    put("name", "Kotlin stdlib+reflect")
+                    put("version", libs.versions.kotlin.get())
+                }
+                addJsonObject {
+                    put("name", "Kotlinx coroutines")
+                    put("version", libs.versions.kotlinx.coroutines.get())
+                }
+                addJsonObject {
+                    put("name", "Kotlinx serialization")
+                    put("version", libs.versions.kotlinx.serialization.get())
+                }
+                addJsonObject {
+                    put("name", "Kotlinx datetime")
+                    put("version", libs.versions.kotlinx.datetime.get())
+                }
+            }.toString(),
+        )
     }
 }
 
 tasks.shadowJar {
-    archiveClassifier = "mod"
     from(generateResources)
     from(rootProject.file("LICENSE.md")) { into("META-INF") }
 }
@@ -75,6 +101,7 @@ tasks.dexJar {
 
 tasks.mergeJar {
     archiveFileName = "kotlin-runtime.jar"
+    archiveClassifier = "mod"
 }
 
 tasks.register("getArtifactPath") {
@@ -83,6 +110,17 @@ tasks.register("getArtifactPath") {
 
 tasks.build {
     dependsOn(tasks.mergeJar)
+}
+
+val downloadSlf4md by tasks.registering(GithubAssetDownload::class) {
+    owner = "xpdustry"
+    repo = "slf4md"
+    asset = "slf4md.jar"
+    version = libs.versions.slf4md.map { "v$it" }
+}
+
+tasks.withType<MindustryExec> {
+    mods.setFrom(downloadSlf4md, tasks.mergeJar)
 }
 
 // Indra adds the javadoc task, we don't want that so disable it

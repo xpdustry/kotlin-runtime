@@ -1,7 +1,7 @@
 #  kotlin-runtime
 
 [![Maven](https://maven.xpdustry.com/api/badge/latest/releases/com/xpdustry/kotlin-runtime?color=008080&name=kotlin-runtime&prefix=v)](https://maven.xpdustry.com/#/releases/com/xpdustry/kotlin-runtime)
-[![Downloads](https://img.shields.io/github/downloads/xpdustry/kotlin-runtime/total?color=008080)](https://github.com/xpdustry/kotlin-runtime/releases)
+[![Downloads](https://img.shields.io/github/downloads/xpdustry/kotlin-runtime/total?color=008080&label=Downloads)](https://github.com/xpdustry/kotlin-runtime/releases)
 [![Mindustry 8.0](https://img.shields.io/badge/Mindustry-8.0-008080)](https://github.com/Anuken/Mindustry/releases)
 [![Discord](https://img.shields.io/discord/519293558599974912?color=008080&label=Discord)](https://discord.xpdustry.com)
 
@@ -15,6 +15,7 @@ It currently comes with kotlin version `2.2.0` and the following libraries :
 - The reflection library
 - The coroutines library
 - The serialization library (json only)
+- The kotlinx datetime library (for compat)
 
 If you want to use other kotlin libraries, don't mind creating an issue.
 
@@ -44,8 +45,11 @@ configurations.runtimeClasspath {
     // Add the following lines if you use coroutines
     exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
     exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
-    // Add the following line if you use serialization json
+    // Add the following line if you use serialization
+    exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core")
     exclude("org.jetbrains.kotlinx", "kotlinx-serialization-json")
+    // Add the following line if you use datetime
+    exclude("org.jetbrains.kotlinx", "kotlinx-datetime")
 }
 ```
 
