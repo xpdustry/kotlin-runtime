@@ -93,6 +93,7 @@ val generateResources = tasks.register("generateFiles") {
 tasks.shadowJar {
     from(generateResources)
     from(rootProject.file("LICENSE.md")) { into("META-INF") }
+    from("assets") { include("**") }
 }
 
 tasks.dexJar {
@@ -127,10 +128,6 @@ components.named("java") {
     val component = this as AdhocComponentWithVariants
     // Indra adds the javadoc task, we don't want that so disable it
     component.withVariantsFromConfiguration(configurations.javadocElements.get()) {
-        skip()
-    }
-    // The published shadow jar is incomplete so remove it
-    component.withVariantsFromConfiguration(configurations.shadowRuntimeElements.get()) {
         skip()
     }
 }
@@ -184,4 +181,8 @@ spotless {
     kotlinGradle {
         ktlint().editorConfigOverride(mapOf("ktlint_code_style" to "intellij_idea", "max_line_length" to "120"))
     }
+}
+
+shadow {
+    addShadowVariantIntoJavaComponent = false
 }
