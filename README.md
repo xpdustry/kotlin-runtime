@@ -9,7 +9,7 @@
 
 This mod allows you to write kotlin mods/plugins without having to ship the kotlin runtime.
 Thus avoiding conflicts with other mods/plugins.
-It currently comes with kotlin version `2.2.0` and the following libraries :
+It currently comes with kotlin version `2.2.20` and the following libraries :
 
 - The standard library (jdk8)
 - The reflection library
