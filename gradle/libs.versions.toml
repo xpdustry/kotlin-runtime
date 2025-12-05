@@ -5,7 +5,7 @@ kotlinx-serialization = "1.9.0"
 kotlinx-datetime = "0.7.1-0.6.x-compat"
 spotless = "8.0.0"
 indra = "3.2.0"
-shadow = "9.2.2"
+shadow = "9.3.0"
 toxopid = "4.1.2"
 slf4md = "1.1.1"
 
