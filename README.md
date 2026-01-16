@@ -1,6 +1,5 @@
 #  kotlin-runtime
 
-[![Maven](https://maven.xpdustry.com/api/badge/latest/releases/com/xpdustry/kotlin-runtime?color=008080&name=kotlin-runtime&prefix=v)](https://maven.xpdustry.com/#/releases/com/xpdustry/kotlin-runtime)
 [![Downloads](https://img.shields.io/github/downloads/xpdustry/kotlin-runtime/total?color=008080&label=Downloads)](https://github.com/xpdustry/kotlin-runtime/releases)
 [![Mindustry 8.0](https://img.shields.io/badge/Mindustry-8.0-008080)](https://github.com/Anuken/Mindustry/releases)
 [![Discord](https://img.shields.io/discord/519293558599974912?color=008080&label=Discord)](https://discord.xpdustry.com)
