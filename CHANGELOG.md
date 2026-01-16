@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v4.3.1-k.2.2.20 - 2025-09-26
+
+### Changes
+
+- Bumped dependencies version, including Kotlin to `2.2.20`.
+- Added mod icon.
+
 ## v4.3.0-k.2.2.0 - 2025-07-21
 
 ### Changes
