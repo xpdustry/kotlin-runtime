@@ -1,3 +1,4 @@
+import com.xpdustry.toxopid.extension.anukeXpdustry
 import com.xpdustry.toxopid.spec.ModMetadata
 import com.xpdustry.toxopid.spec.ModPlatform
 import com.xpdustry.toxopid.task.GithubAssetDownload
@@ -7,12 +8,10 @@ import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.put
 
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.spotless)
     alias(libs.plugins.indra.common)
-    alias(libs.plugins.indra.git)
-    alias(libs.plugins.indra.publishing)
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.shadow)
     alias(libs.plugins.toxopid)
 }
@@ -24,12 +23,10 @@ buildscript {
 }
 
 val metadata = ModMetadata.fromJson(file("mod.json"))
-group = "com.xpdustry"
-metadata.version += "-k." + libs.versions.kotlin.get()
-if (indraGit.headTag() == null) {
-    metadata.version += "-SNAPSHOT"
-}
+metadata.version += "+k." + libs.versions.kotlin.get()
+metadata.version += if (findProperty("release").toString().toBoolean()) "" else "-SNAPSHOT"
 version = metadata.version
+group = "com.xpdustry"
 description = metadata.description
 
 toxopid {
@@ -39,10 +36,7 @@ toxopid {
 
 repositories {
     mavenCentral()
-    maven("https://maven.xpdustry.com/mindustry") {
-        name = "xpdustry-mindustry"
-        mavenContent { releasesOnly() }
-    }
+    anukeXpdustry()
 }
 
 dependencies {
@@ -56,7 +50,7 @@ dependencies {
     api(libs.kotlinx.datetime)
 }
 
-val generateResources = tasks.register("generateFiles") {
+val generateModResources by tasks.registering {
     outputs.files(fileTree(temporaryDir))
 
     doLast {
@@ -75,15 +69,27 @@ val generateResources = tasks.register("generateFiles") {
                 }
                 addJsonObject {
                     put("name", "Kotlinx coroutines")
-                    put("version", libs.versions.kotlinx.coroutines.get())
+                    put(
+                        "version",
+                        libs.versions.kotlinx.coroutines
+                            .get(),
+                    )
                 }
                 addJsonObject {
                     put("name", "Kotlinx serialization")
-                    put("version", libs.versions.kotlinx.serialization.get())
+                    put(
+                        "version",
+                        libs.versions.kotlinx.serialization
+                            .get(),
+                    )
                 }
                 addJsonObject {
                     put("name", "Kotlinx datetime")
-                    put("version", libs.versions.kotlinx.datetime.get())
+                    put(
+                        "version",
+                        libs.versions.kotlinx.datetime
+                            .get(),
+                    )
                 }
             }.toString(),
         )
@@ -91,7 +97,7 @@ val generateResources = tasks.register("generateFiles") {
 }
 
 tasks.shadowJar {
-    from(generateResources)
+    from(generateModResources)
     from(rootProject.file("LICENSE.md")) { into("META-INF") }
     from("assets") { include("**") }
 }
@@ -103,10 +109,6 @@ tasks.dexJar {
 tasks.mergeJar {
     archiveFileName = "kotlin-runtime.jar"
     archiveClassifier = "mod"
-}
-
-tasks.register("getArtifactPath") {
-    doLast { println(tasks.mergeJar.get().archiveFile.get().toString()) }
 }
 
 tasks.build {
@@ -124,52 +126,10 @@ tasks.withType<MindustryExec> {
     mods.setFrom(downloadSlf4md, tasks.mergeJar)
 }
 
-components.named("java") {
-    val component = this as AdhocComponentWithVariants
-    // Indra adds the javadoc task, we don't want that so disable it
-    component.withVariantsFromConfiguration(configurations.javadocElements.get()) {
-        skip()
-    }
-}
-
-signing {
-    val signingKey: String? by project
-    val signingPassword: String? by project
-    useInMemoryPgpKeys(signingKey, signingPassword)
-}
-
 indra {
     javaVersions {
         target(8)
         minimumToolchain(17)
-    }
-
-    publishSnapshotsTo("xpdustry", "https://maven.xpdustry.com/snapshots")
-    publishReleasesTo("xpdustry", "https://maven.xpdustry.com/releases")
-
-    mitLicense()
-
-    val repo = metadata.repository.split("/")
-    github(repo[0], repo[1]) {
-        ci(true)
-        issues(true)
-        scm(true)
-    }
-
-    configurePublications {
-        pom {
-            organization {
-                name.set("Xpdustry")
-                url.set("https://www.xpdustry.com")
-            }
-
-            developers {
-                developer {
-                    id.set("Phinner")
-                    timezone.set("Europe/Brussels")
-                }
-            }
-        }
     }
 }
 
@@ -179,10 +139,6 @@ spotless {
         licenseHeaderFile(rootProject.file("HEADER.txt"))
     }
     kotlinGradle {
-        ktlint().editorConfigOverride(mapOf("ktlint_code_style" to "intellij_idea", "max_line_length" to "120"))
+        ktlint()
     }
-}
-
-shadow {
-    addShadowVariantIntoJavaComponent = false
 }
