@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v4.3.3+k.2.3.0 - 2026-01-16
+
+#### Hotfixes
+
+- Use latest version of R8 ([`cdacde5`](https://github.com/xpdustry/kotlin-runtime/commit/cdacde5f4de6847be6d7af5403cee02aab048f6f))
+
+The last build an outdated version which did not support Kotlin `2.3` correctly.
+
+> ### v4.3.2+k.2.3.0 release
+
+#### :warning: Breaking changes :warning:
+
+- The release scheme has changed. From now on, the Kotlin version is now appended as `+k.version` instead of `-k.version`.
+
+#### Maintenance
+
+- Updated deps and Kotlin to `2.3`.
+
 ## v4.3.2+k.2.3.0 - 2026-01-16
 
 ### :warning: Breaking changes :warning:
