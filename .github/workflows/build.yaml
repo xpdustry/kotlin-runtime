@@ -52,7 +52,9 @@ jobs:
         run: |
           version="$(./gradlew properties -q | grep '^version:' | cut -d ':' -f 2 | xargs)"
           .xpdustry-ci/scripts/version-validate.sh "$version" "$ORG_GRADLE_PROJECT_release"
-          echo "version=${version%-SNAPSHOT}" >> "$GITHUB_OUTPUT"
+          version="${version%\+*}"
+          version="${version%-SNAPSHOT}"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
 
       - name: "Build Gradle"
         run: ./gradlew build
