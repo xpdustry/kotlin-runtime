@@ -20,7 +20,5 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 indra-common = { id = "net.kyori.indra", version.ref = "indra" }
-indra-publishing = { id = "net.kyori.indra.publishing", version.ref = "indra" }
-indra-git = { id = "net.kyori.indra.git", version.ref = "indra" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 toxopid = { id = "com.xpdustry.toxopid", version.ref = "toxopid" }
