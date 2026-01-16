@@ -18,7 +18,7 @@ It currently comes with kotlin version `2.3.0` and the following libraries :
 
 If you want to use other kotlin libraries, don't mind creating an issue.
 
-> This mod supports android too, although you should still avoid certain java 8 features.
+This mod also supports android, although you should still avoid certain java 8 features.
 
 ## Usage
 
@@ -58,6 +58,6 @@ This mod requires Mindustry v154 or later and Java 8 or later.
 
 ## Building
 
-- `./gradlew shadowJar` to only compile the mod (it will be located at `/build/libs/kotlin-runtime.jar`).
-- `./gradlew runMindustryServer` to run the mod in a local Mindustry server.
-- `./gradlew runMindustryClient` to run a local Mindustry client.
+- `./gradlew :mergeJar` to only compile the mod (it will be located at `build/libs/kotlin-runtime.jar`).
+- `./gradlew :runMindustryServer` to run the mod in a local Mindustry server.
+- `./gradlew :runMindustryClient` to run a local Mindustry client.
