@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.3.0"
 kotlinx-coroutines = "1.10.2"
-kotlinx-serialization = "1.9.0"
+kotlinx-serialization = "1.10.0"
 kotlinx-datetime = "0.7.1-0.6.x-compat"
 spotless = "8.1.0"
 indra = "4.0.0"
