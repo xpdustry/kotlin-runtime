@@ -1,12 +1,12 @@
 [versions]
-kotlin = "2.3.0"
+kotlin = "2.3.10"
 kotlinx-coroutines = "1.10.2"
 kotlinx-serialization = "1.9.0"
 kotlinx-datetime = "0.7.1-0.6.x-compat"
-spotless = "8.1.0"
+spotless = "8.2.1"
 indra = "4.0.0"
 shadow = "9.3.1"
-toxopid = "4.1.2"
+toxopid = "4.2.0"
 slf4md = "1.1.1"
 r8 = "8.13.19"
 
