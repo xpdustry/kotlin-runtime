@@ -136,7 +136,7 @@ indra {
 spotless {
     kotlin {
         ktfmt().kotlinlangStyle()
-        licenseHeaderFile(rootProject.file("HEADER.txt"))
+        licenseHeader("// SPDX-License-Identifier: MIT")
     }
     kotlinGradle {
         ktlint()
