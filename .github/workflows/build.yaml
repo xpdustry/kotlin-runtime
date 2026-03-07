@@ -62,8 +62,8 @@ jobs:
       - name: "Upload Artifacts"
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
         with:
-          name: artifacts
           path: "build/libs/kotlin-runtime.jar"
+          archive: false
           if-no-files-found: error
 
       - name: "Upload Test Results"
