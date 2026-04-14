@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v4.3.5+k.2.3.20 - 2026-04-14
+
+### Maintenance
+
+- Update kotlin to `v2.3.20`.
+- Update kotlinx-serialization to `v1.11.0` ([`faff7ff`](https://github.com/xpdustry/kotlin-runtime/commit/faff7ff7b7cd2458d24c0f9808a1bc46a1fbc7be))
+
 ## v4.3.4+k.2.3.10 - 2026-03-07
 
 ### Maintenance
