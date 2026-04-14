@@ -4,7 +4,7 @@
   "author": "Xpdustry",
   "description": "A companion mod for Kotlin based mods and plugins.",
   "version": "4.3.6",
-  "minGameVersion": "154",
+  "minGameVersion": "157",
   "hidden": true,
   "java": true,
   "main": "com.xpdustry.kotlin.KotlinRuntimeMod",

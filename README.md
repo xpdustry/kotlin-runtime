@@ -54,7 +54,7 @@ configurations.runtimeClasspath {
 
 ## Requirements
 
-This mod requires Mindustry v154 or later and Java 8 or later.
+This mod requires Mindustry v157 or later and Java 8 or later.
 
 ## Building
 
