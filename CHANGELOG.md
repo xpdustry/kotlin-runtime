@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v4.3.6+k.2.3.20 - 2026-04-14
+
+### Maintenance
+
+- Bump mindustry min version to v157 ([`feae9e5`](https://github.com/xpdustry/kotlin-runtime/commit/feae9e540998ee86beac23c0ac83304c58ea96be))
+
 ## v4.3.5+k.2.3.20 - 2026-04-14
 
 ### Maintenance
