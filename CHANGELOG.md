@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v4.3.7+k.2.3.21 - 2026-05-11
+
+### Maintenance
+
+- Update kotlinx-coroutines to v1.11.0 ([`2c784d9`](https://github.com/xpdustry/kotlin-runtime/commit/2c784d907e1c567ac7cb7e7acb994628dd189ac4))
+- Update kotlinx-datetime compat  to v0.8.0-0.6.x-compat ([`9d092f4`](https://github.com/xpdustry/kotlin-runtime/commit/9d092f40f31786c79b788a795530fa56c8e195fe))
+
 ## v4.3.6+k.2.3.20 - 2026-04-14
 
 ### Maintenance
