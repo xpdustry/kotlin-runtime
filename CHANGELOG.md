@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v4.3.8+k.2.4.10 - 2026-07-18
+
+### Maintenance
+
+- Updated kotlin to v2.4.10
+
 ## v4.3.7+k.2.3.21 - 2026-05-11
 
 ### Maintenance
