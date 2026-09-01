@@ -8,7 +8,7 @@ indra = "4.0.0"
 shadow = "9.6.0"
 toxopid = "4.2.0"
 slf4md = "1.1.1"
-r8 = "9.1.31"
+r8 = "9.4.17"
 
 [libraries]
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
