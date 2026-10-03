@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v4.3.9+k.2.4.20 - 2026-10-03
+
+### Maintenance
+
+- Updated kotlin to v2.4.20 ([`227fcc2`](https://github.com/xpdustry/kotlin-runtime/commit/227fcc207c294f62ea72e58dfdba2ffac5c6f2c1))
+- Updated r8 to v9.4.28 ([`ae7db18`](https://github.com/xpdustry/kotlin-runtime/commit/ae7db18115bdd21a8e08713c66485564efdf55fa))
+- Updated build systems and CI actions ([`227fcc2`](https://github.com/xpdustry/kotlin-runtime/commit/227fcc207c294f62ea72e58dfdba2ffac5c6f2c1), [`97061f0`](https://github.com/xpdustry/kotlin-runtime/commit/97061f09fb1d919fa3d7cc280455570f5bc6aba9))
+
 ## v4.3.8+k.2.4.10 - 2026-07-18
 
 ### Maintenance
